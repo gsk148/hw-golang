@@ -9,6 +9,7 @@ import (
 
 var ErrInvalidString = errors.New("invalid string")
 
+// Unpack function unpacking of string.
 func Unpack(str string) (string, error) {
 	var value string
 	var b strings.Builder
