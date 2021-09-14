@@ -43,3 +43,22 @@ func TestUnpackInvalidString(t *testing.T) {
 		})
 	}
 }
+
+func TestUnpackCyrillicChars(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected string
+	}{
+		{input: "Кар5ась", expected: "Карррррась"},
+		{input: "М1У1-М1У1", expected: "МУ-МУ"},
+	}
+
+	for _, tc := range tests {
+		tc := tc
+		t.Run(tc.input, func(t *testing.T) {
+			result, err := Unpack(tc.input)
+			require.NoError(t, err)
+			require.Equal(t, tc.expected, result)
+		})
+	}
+}
