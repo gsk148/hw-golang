@@ -43,6 +43,10 @@ var text = `Как видите, он  спускается  по  лестни�
 	посидеть у огня и послушать какую-нибудь интересную сказку.
 		В этот вечер...`
 
+var smallText = `Дело было вечером, делать было нечего`
+
+var differentCaseOFText = `daD dAd Dad`
+
 func TestTop10(t *testing.T) {
 	t.Run("no words in empty string", func(t *testing.T) {
 		require.Len(t, Top10(""), 0)
@@ -78,5 +82,20 @@ func TestTop10(t *testing.T) {
 			}
 			require.Equal(t, expected, Top10(text))
 		}
+	})
+
+	t.Run("number of words is less ten", func(t *testing.T) {
+		expected := []string{
+			"было",
+			"Дело",
+			"вечером,",
+			"делать",
+			"нечего",
+		}
+		require.Equal(t, expected, Top10(smallText))
+	})
+
+	t.Run("different words with different text", func(t *testing.T) {
+		require.Len(t, Top10(differentCaseOFText), 3)
 	})
 }
